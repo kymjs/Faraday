@@ -9,14 +9,14 @@ import java.util.Locale;
  * Created by ZhangTao on 3/7/17.
  */
 
-public class JsCallback {
+public class JSCallback {
 
     private static final String CALLBACK_JS_FORMAT = "javascript:JSBridge.onComplete(%s, %s);";
 
     private WeakReference<WebView> mWebViewRef;
     private String sid;
 
-    public JsCallback(WebView webView, String sid) {
+    public JSCallback(WebView webView, String sid) {
         mWebViewRef = new WeakReference<>(webView);
         this.sid = sid;
     }

@@ -8,7 +8,6 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 
 import com.kymjs.faraday.FaradayBridge;
-import com.kymjs.faraday.jssdk.http.HttpEngine;
 import com.kymjs.faraday.jssdk.view.ViewDialog;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,9 +19,8 @@ public class MainActivity extends AppCompatActivity {
 
         //注册声明好的JSBridge
         //一定要在webview加载之前注册,否则无法生效
-        FaradayBridge.getInstance().addNativeMethod(DemoBridge.BRIDGE_NAME, DemoBridge.class);
-        FaradayBridge.getInstance().addNativeMethod(ViewDialog.BRIDGE_NAME, ViewDialog.class);
-        FaradayBridge.getInstance().addNativeMethod(HttpEngine.BRIDGE_NAME, HttpEngine.class);
+        FaradayBridge.getInstance().register(new DemoBridge());
+        FaradayBridge.getInstance().register(ViewDialog.BRIDGE_NAME, new ViewDialog());
 
         //开调试(API 19)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -42,5 +40,13 @@ public class MainActivity extends AppCompatActivity {
             result.confirm(FaradayBridge.getInstance().call(view, message));
             return true;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //当不使用webview时
+        //静态变量持有map，不clean会造成内存泄漏
+        FaradayBridge.getInstance().clear();
     }
 }
