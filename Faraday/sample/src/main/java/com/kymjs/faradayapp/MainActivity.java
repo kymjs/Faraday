@@ -30,6 +30,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         WebView webView = (WebView) findViewById(R.id.webview);
+        //移除默认内置接口,防止远程代码执行
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            webView.removeJavascriptInterface("searchBoxJavaBridge_");
+            webView.removeJavascriptInterface("accessibility");
+            webView.removeJavascriptInterface("accessibilityTraversal");
+        }
+
         webView.setWebChromeClient(new InjectedChromeClient());
         webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl("file:///android_asset/index.html");

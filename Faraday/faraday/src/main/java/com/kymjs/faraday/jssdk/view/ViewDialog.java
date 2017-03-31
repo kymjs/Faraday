@@ -17,16 +17,19 @@ import org.json.JSONObject;
 public class ViewDialog implements JSBridge {
 
     public static final String BRIDGE_NAME = "ViewDialog";
+    
+    private static final String KEY_MESSAGE = "message";
+    private static final String KEY_SHOWLONG = "isShowLong";
 
     @JavascriptInterface
     public static void toast(Context context, JSONObject params, final JsCallback jsCallback) {
-        String message = params.optString("message");
-        int isShowLong = params.optInt("isShowLong");
+        String message = params.optString(KEY_MESSAGE);
+        int isShowLong = params.optInt(KEY_SHOWLONG);
         Toast.makeText(context, message, isShowLong == 0 ? Toast.LENGTH_SHORT : Toast.LENGTH_LONG).show();
         if (null != jsCallback) {
             jsCallback.apply(JSONUtil.getInstance()
                     .addStatus(RESULT_SUCCESS)
-                    .addMessage("success").build());
+                    .addMessage("success message").build());
         }
     }
 
