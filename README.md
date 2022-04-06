@@ -4,6 +4,8 @@
 
 ## Faraday
 
+[中文文档](https://github.com/kymjs/Faraday/blob/master/Readme_zh.md)   
+
 A set of perfect H5 hybrid jsbridge solution of Android, which is simple and convenient for development and debugging
 
 * Compatible with Android 12
