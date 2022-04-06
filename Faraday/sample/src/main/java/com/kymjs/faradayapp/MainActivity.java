@@ -2,10 +2,11 @@ package com.kymjs.faradayapp;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.webkit.JsPromptResult;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.kymjs.faraday.FaradayBridge;
 import com.kymjs.faraday.jssdk.view.ViewDialog;
